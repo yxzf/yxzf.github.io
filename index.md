@@ -4,8 +4,7 @@ permalink: /
 title: "最新文章"
 image:
     feature: cover.jpg
-    credit: Hubber's high resolution photo
-    creditlink: http://www.universetoday.com/wp-content/uploads/2010/02/The-Majestic-Sombrero-Galaxy-M104.jpg
+    credit: 沈成光
 ---
 
 <div class="tiles">
