@@ -1,7 +1,7 @@
 # Site wide configuration
 
-title: "Jun's Tech Blog"
-description: "技术博客"
+title: "Shen's  Blog"
+description: "无风居士的博客"
 logo: logo.jpg # 120x120 px default image used for Twitter summary card
 teaser: /teaser/default.jpg # 400x250 px default teaser image used in image archive grid
 locale:
@@ -32,8 +32,8 @@ gems:
 
 # Site owner
 owner: 
-  name: 雷军
-  email: leijun00@gmail.com
+  name: 沈成光
+  email: shenchengguang@gmail.com
   bio: 
   avatar: logo.jpg # 160x160 px image for author byline
 
