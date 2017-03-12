@@ -2,7 +2,7 @@
 layout: post
 title: GIT分支管理
 categories:
-- development
+- math
 tags:
 - git
 - 分支管理
