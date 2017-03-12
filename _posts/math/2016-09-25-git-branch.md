@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GIT分支管理
+title: GIT分支管理-Math
 categories:
 - math
 tags:
