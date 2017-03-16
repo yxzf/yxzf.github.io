@@ -24,7 +24,7 @@ CTR的样本标签一般直接从是否点击获得，特征则会考虑很多�
 Neural Network是典型的连续值模型，而CTR预估的输入更多时候是离散特征。所以一个自然的想法就是如何将将离散特征转换为连续特征。如果你对词向量模型熟悉的话，可以发现之间的共通点。在自然语言处理(NLP)中，为了将自然语言交给机器学习中的算法来处理，通常需要首先将语言数学化，词向量就是用来将语言中的词进行数学化的一种方式。
 
 一种最简单的词向量方式是one-hot，但这么做不能很好的刻画词之间的关系(例如相似性)，另外规模变大，带来维度灾难。因此Embeding的方法被提出，基本思路是将词都映射成一个固定长度的向量(向量大小远小于one-hot编码向量大些)，向量中元素不再是只有一位是1，而是每一位都有值。将所有词向量放在一起就是一个词向量空间，这样就可以表达词之间的关系，同时达到降维的效果。
-![](/images/deeplearning/dnn_ctr_fig/embeding.png =100*100)
+![](/images/deeplearning/dnn_ctr_fig/embeding.png)
 那么接下来就是如何进行Embeding
 ###### FM Embeding
 
@@ -69,7 +69,7 @@ CNN用于提取局部特征，在图像、NLP都取得不错的效果，如果�
 
 
 
-####参考文献
+#### 参考文献
 1. Deep Learning over Multi-field Categorical Data – A Case Study on User Response Prediction
 2. Product-based Neural Networks for User Response Prediction
 3. Wide & Deep Learning for Recommender Systems 
