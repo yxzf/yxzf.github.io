@@ -31,6 +31,8 @@ Neural Network是典型的连续值模型，而CTR预估的输入更多时候是
 ###### 3.1 FM Embeding
 Factorization Machine是近年来在推荐、CTR预估中常用的一种算法，该算法在LR的基础上考虑交叉项，如下面公式所示：
 ![](/images/deeplearning/dnn_ctr/fm.png)
+
+
 FM在后半部分的交叉项中为每个特征都分配一个特征向量V，这其实可以看作是一种Embeding的方法。Dr.Zhang在文献[1]中提出一种利用FM得到特征的embeding向量并将其组合成dense real层作为DNN的输入的模型，FNN。FNN模型的具体设计如下：
 ![](/images/deeplearning/dnn_ctr/fnn.png)
 
