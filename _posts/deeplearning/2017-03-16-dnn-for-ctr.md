@@ -7,7 +7,7 @@ tags:
 - DNN
 - CTR
 image:
-    teaser: /development/git_branch.png
+    teaser: /deeplearning/CTR.jpg
 ---
 
 #### 1.CTR预估
