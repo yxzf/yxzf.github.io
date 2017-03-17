@@ -7,7 +7,7 @@ tags:
 - DNN
 - CTR
 image:
-    teaser: /deeplearning/CTR.jpg
+    teaser: /deeplearning/CTR.png
 ---
 
 #### 1.CTR预估
