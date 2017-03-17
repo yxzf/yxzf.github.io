@@ -7,7 +7,7 @@ tags:
 - DNN
 - CTR
 image:
-    teaser: /deeplearning/CTR.png
+    teaser: /deeplearning/dnn_ctr/CTR.png
 ---
 
 #### 1.CTR预估
@@ -23,24 +23,26 @@ Neural Network是典型的连续值模型，而CTR预估的输入更多时候是
 一种最简单的词向量方式是one-hot，但这么做不能很好的刻画词之间的关系(例如相似性)，另外数据规模会非常大，带来维度灾难。因此Embeding的方法被提出，基本思路是将词都映射成一个固定长度的向量(向量大小远小于one-hot编码向量大些)，向量中元素不再是只有一位是1，而是每一位都有值。将所有词向量放在一起就是一个词向量空间，这样就可以表达词之间的关系，同时达到降维的效果。
 
 既然Embeding可以将离散的词表达成连续值的词向量，那么对于CTR中的类别特征也可以使用Embeding得到连续值向量，再和其他连续值特征构成NN的输入。下图就是这种思路的表达。
-![](/images/deeplearning/dnn_ctr_fig/embeding.png)
-所以问题的关键就是采用何种Embeding技术将离线特征转换到离线空间。
+![](/images/deeplearning/dnn_ctr/embeding.png)
+
+
+因此问题的关键就是采用何种Embeding技术将离线特征转换到离线空间。
 
 ###### 3.1 FM Embeding
 Factorization Machine是近年来在推荐、CTR预估中常用的一种算法，该算法在LR的基础上考虑交叉项，如下面公式所示：
-![](/images/deeplearning/dnn_ctr_fig/fm.png)
+![](/images/deeplearning/dnn_ctr/fm.png)
 FM在后半部分的交叉项中为每个特征都分配一个特征向量V，这其实可以看作是一种Embeding的方法。Dr.Zhang在文献[1]中提出一种利用FM得到特征的embeding向量并将其组合成dense real层作为DNN的输入的模型，FNN。FNN模型的具体设计如下：
-![](/images/deeplearning/dnn_ctr_fig/fnn.png)
+![](/images/deeplearning/dnn_ctr/fnn.png)
 
 Dr.Zhang在模型中做了一个假设，就是每个category field只有一个值为1，也就是每个field是个one-hot表达向量。field是指特征的种类，例如将特征occupation one-hot之后是三维向量，但这个向量都属于一个field，就是occupation。这样虽然离散化后的特征有几亿，但是category field一般是几十到几百。
 模型得到每个特征的Embeding向量后，将特征归纳到其属于field，得到向量z，z的大小就是1+#fields * #embeding 。z是一个固定长度的向量之后再在上面加入多个隐藏层最终得到FNN模型。
 
 Dr.Zhang在FNN模型的基础上又提出了下面的新模型PNN.
 PNN和FNN的主要不同在于除了得到z向量，还增加了一个p向量，即Product向量。Product向量由每个category field的feature vector做inner product 或则 outer product 得到，作者认为这样做有助于特征交叉。另外PNN中Embeding层不再由FM生成，可以在整个网络中训练得到。
-![](/images/deeplearning/dnn_ctr_fig/pnn.png)
+![](/images/deeplearning/dnn_ctr/pnn.png)
 
 ###### 3.2 NN Embeding
-![](/images/deeplearning/dnn_ctr_fig/wide&deep.png)
+![](/images/deeplearning/dnn_ctr/wide&deep.png)
 Google团队最近提出Wide and Deep Model。在他们的模型中，Wide Models其实就是LR模型，输入原始的特征和一些交叉组合特征；Deep Models通过Embeding层将稀疏的特征转换为稠密的特征，再使用DNN。最后将两个模型Join得到整个大模型，他们认为模型具有memorization and generalization特性。
 Wide and Deep Model中原始特征既可以是category，也可以是continue，这样更符合一般的场景。另外Embeding层是将每个category特征分别映射到embeding size的向量，如他们在TensorFlow代码中所示：
 ```
@@ -57,17 +59,17 @@ deep_columns = [
 #### 4.结合图像
 目前很多在线广告都是图片形式的，文献[4]提出将图像也做为特征的输入。这样原始特征就分为两类，图像部分使用CNN，非图像部分使用NN处理。
 其实这篇文章并没有太多新颖的方法，只能说多了一种特征。对于非图像特征，作者直接使用全连接神经网络，并没有使用Embeding。
-![](/images/deeplearning/dnn_ctr_fig/conv_ctr.png)
+![](/images/deeplearning/dnn_ctr/conv_ctr.png)
 
 #### 5.CNN
 CNN用于提取局部特征，在图像、NLP都取得不错的效果，如果在CTR预估中使用却是个难题。我认为最大的困难时如何构建对一个样本构建如图像那样的矩阵，能够具有局部联系和结构。如果不能构造这样的矩阵，使用CNN是没有什么意思的。
 文献[5]是发表在CIKM2015的一篇短文，文章提出对使用CNN来进行CTR预估进行了尝试。
 一条广告展示(single ad impression)包括：element = (user; query; ad, impression time, site category, device type, etc)
 用户是否点击一个广告与用户的历史ad impression有关。这样，一个样本将会是(s, label) ，s由多条l组成(数目不定)
-![](/images/deeplearning/dnn_ctr_fig/s_matrix.png)
+![](/images/deeplearning/dnn_ctr/s_matrix.png)
 
 作者提出CCPM模型处理这样的数据。每个样本有n个element，对每个element使用embeding 得到定长为d的向量$e_i\in R^d$，再构造成一个矩阵$s\in R^{d* n}$，得到s矩阵之后就可以套用CNN，后面的其实没有太多创新点。
-![](/images/deeplearning/dnn_ctr_fig/ccpm.png)
+![](/images/deeplearning/dnn_ctr/ccpm.png)
 
 
 
