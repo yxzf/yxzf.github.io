@@ -52,7 +52,7 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 #### 3 Character-Aware Neural Language Models
 ##### 3.1 原理
 这篇文章提出一种CNN+RNN结合的模型。CNN部分，每个单词由character组成，如果对character构造embeding向量，则可以对单词构造矩阵作为CNN的输入。CNN的输出为词向量，作为RNN的输入，RNN的输出则是以整个词为单位。
-
+![](/images/deeplearning/cnn_nlp/char-cnn-rnn.png)
 ###### 3.1.1 CNN层
 **输入层**: 一个句子(sentence)是一个输入样本，句子由词(word)构成，词由字符(character)组成。每个字符学习一个embeding字符向量，设字符向量长度为k，那么一个word(长度为w)就可以构造成一个矩阵C(k*w)
 
@@ -84,9 +84,9 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 
 
 #### 参考资料
-https://github.com/Lasagne/Lasagne/blob/highway_example/examples/Highway%20Networks.ipynb
-http://www.jeyzhang.com/cnn-apply-on-modelling-sentence.html
-http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
-http://www.wtoutiao.com/p/H08qKy.html
-http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf
+1. https://github.com/Lasagne/Lasagne/blob/highway_example/examples/Highway%20Networks.ipynb
+2. http://www.jeyzhang.com/cnn-apply-on-modelling-sentence.html
+3. http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
+4. http://www.wtoutiao.com/p/H08qKy.html
+5. http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+6. https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf
