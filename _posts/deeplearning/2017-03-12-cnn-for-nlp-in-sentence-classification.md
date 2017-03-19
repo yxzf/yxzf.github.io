@@ -34,7 +34,7 @@ CNN的输入是矩阵形式，因此首先是构造矩阵。句子有词构成�
 http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/)用TensorFlow实现了这个模型，[代码](https://github.com/dennybritz/cnn-text-classification-tf)。我参考这个代码用mxnet实现了，[代码](https://github.com/yxzf/cnn-text-classification-mx)
 
 #### 2 Character-level Convolutional Networks for Text Classification
-#####2.1 原理
+##### 2.1 原理
 图像的基本都要是像素单元，那么在语言中基本的单元应该是字符。CNN在图像中有效就是从原始特征不断向上提取高阶特征，那么在NLP中可以从字符构造矩阵，再应用CNN来做。这篇论文就是这个思路。
 ![](/images/deeplearning/cnn_nlp/model2.png)
 ###### 输入层
@@ -46,7 +46,7 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 全连接层的具体设置如下
 ![/images/deeplearning/cnn_nlp/model2_fc.png]
 
-#####2.2 实现
+##### 2.2 实现
 [代码](https://github.com/scharmchi/char-level-cnn-tf)给出了TensorFlow的实现，我用mxnet实现的[代码](https://github.com/yxzf/char-level-cnn-mx)
 
 #### 3 Character-Aware Neural Language Models
