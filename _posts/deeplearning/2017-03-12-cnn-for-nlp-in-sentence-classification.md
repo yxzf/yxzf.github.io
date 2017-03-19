@@ -54,37 +54,28 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 这篇文章提出一种CNN+RNN结合的模型。CNN部分，每个单词由character组成，如果对character构造embeding向量，则可以对单词构造矩阵作为CNN的输入。CNN的输出为词向量，作为RNN的输入，RNN的输出则是以整个词为单位。
 
 ###### 3.1.1 CNN层
-输入层
+**输入层**: 一个句子(sentence)是一个输入样本，句子由词(word)构成，词由字符(character)组成。每个字符学习一个embeding字符向量，设字符向量长度为k，那么一个word(长度为w)就可以构造成一个矩阵C(k*w)
 
-一个句子(sentence)是一个输入样本，句子由词(word)构成，词由字符(character)组成。每个字符学习一个embeding字符向量，设字符向量长度为k，那么一个word(长度为w)就可以构造成一个矩阵C(k*w)
-
-卷积层
-
+**卷积层**:
 对这个矩阵C使用多个卷积层，每个卷积层的kernel大小为(k*n)。卷积层可以看作是character的n-gram，那么每个卷积操作后得到的矩阵为(1*(w-n+1))
 
-池化层
-
+**池化层**:
 池化层仍是max-pooling，挑选出(w-n+1)长度向量中的最大值，将所有池化层的结果拼接就可以得到定长的向量p，p的长度为所有卷积层的数目
 
-Highway层
-
+**Highway层**:
 [Highway层](https://arxiv.org/pdf/1505.00387.pdf)是最近刚提出的一种结构，借鉴LSTM的gate概念。x为该层的输入，那么首先计算一个非线性转换T(x)，$T(x)\in [0, 1]$(T一般为sigmod)。除了T(x)，还有另外一个非线性转换H(x)，最终的输出为$y = T(x) * H(x) + (1 - T(x)) * x$。从公式来看，T(x)充当了gate，如果T(x)=1，那么输出同传统的非线性层一样，输出是H(x)，如果T(x)=0，则直接输出输入x。作者认为Highway层的引入避免了梯度的快速消失，这种特性可以构建更深的网络。
 
-输出
-
+**输出层**:
 每个单词将得到一个词向量，与一般的词向量获取不同，这里的词向量是DNN在character embeding上得到的。
 
 ###### 3.1.2 RNN层
-输入层
-
+**输入层**:
 将一个句子的每个CNN输出作为词向量，整个句子就是RNN的输入层
 
-隐藏层
-
+**隐藏层**:
 一般使用LSTM，也可以是GRU
 
-输出层
-
+**输出层**:
 输出层以word为单位，而不是character. 
 
 ##### 3.2实现
