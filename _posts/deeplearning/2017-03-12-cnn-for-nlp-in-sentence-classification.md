@@ -54,9 +54,10 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 这篇文章提出一种CNN+RNN结合的模型。CNN部分，每个单词由character组成，如果对character构造embeding向量，则可以对单词构造矩阵作为CNN的输入。CNN的输出为词向量，作为RNN的输入，RNN的输出则是以整个词为单位。
 
 ###### 3.1.1 CNN层
-####### 输入层
+输入层
+
 一个句子(sentence)是一个输入样本，句子由词(word)构成，词由字符(character)组成。每个字符学习一个embeding字符向量，设字符向量长度为k，那么一个word(长度为w)就可以构造成一个矩阵C(k*w)
-####### 卷积层
+###### 卷积层
 对这个矩阵C使用多个卷积层，每个卷积层的kernel大小为(k*n)。卷积层可以看作是character的n-gram，那么每个卷积操作后得到的矩阵为(1*(w-n+1))
 ####### 池化层
 池化层仍是max-pooling，挑选出(w-n+1)长度向量中的最大值，将所有池化层的结果拼接就可以得到定长的向量p，p的长度为所有卷积层的数目
