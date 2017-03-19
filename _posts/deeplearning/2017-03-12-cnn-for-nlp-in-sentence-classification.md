@@ -69,7 +69,9 @@ http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nl
 Highway层
 
 [Highway层](https://arxiv.org/pdf/1505.00387.pdf)是最近刚提出的一种结构，借鉴LSTM的gate概念。x为该层的输入，那么首先计算一个非线性转换T(x)，$T(x)\in [0, 1]$(T一般为sigmod)。除了T(x)，还有另外一个非线性转换H(x)，最终的输出为$y = T(x) * H(x) + (1 - T(x)) * x$。从公式来看，T(x)充当了gate，如果T(x)=1，那么输出同传统的非线性层一样，输出是H(x)，如果T(x)=0，则直接输出输入x。作者认为Highway层的引入避免了梯度的快速消失，这种特性可以构建更深的网络。
-####### 输出
+
+输出
+
 每个单词将得到一个词向量，与一般的词向量获取不同，这里的词向量是DNN在character embeding上得到的。
 
 ###### 3.1.2 RNN层
