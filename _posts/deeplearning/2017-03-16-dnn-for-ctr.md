@@ -79,8 +79,9 @@ CNN用于提取局部特征，在图像、NLP都取得不错的效果，如果�
 * 如果用户在之前的impression很快离开广告页面，那么将会在接下来一段时间内不会点击类似的广告
 * 如果用户最近有过与广告相关的查询，那么接下来点击相关广告的可能性会大幅提升
 * 前面的两种行为还可能随着间隔时间的增加而不是那么相关
+
 当前关联不止这些，而且人工难以刻画，需要模型来自动提取。RNN模型对此类问题非常适用，作者的主要工作是将数据集构造成适合RNN的输入（即对用户的历史ad impression根据时间排序），对模型本身并没有改进。
- 
+![](/images/deeplearning/dnn_ctr/rnn_ctr.png) 
 #### 参考文献
 1. Deep Learning over Multi-field Categorical Data – A Case Study on User Response Prediction
 2. Product-based Neural Networks for User Response Prediction
