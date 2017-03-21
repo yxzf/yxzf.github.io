@@ -74,7 +74,13 @@ CNN用于提取局部特征，在图像、NLP都取得不错的效果，如果�
 ![](/images/deeplearning/dnn_ctr/ccpm.png)
 
 
-
+#### 6.RNN
+考虑搜索场景下的CTR预估，如果考虑历史信息，如可以将一个用户的历史ad impression构成一个时间序列。RNN非常适合时间序列的场景，如语言建模等。[这篇](http://dl.acm.org/citation.cfm?id=2893873.2894086) 发表在AAAI2014将RNN模型引入CTR预估。作者首先在数据集上验证了用户的点击行为与之前的ad impression历史有关联：
+* 如果用户在之前的impression很快离开广告页面，那么将会在接下来一段时间内不会点击类似的广告
+* 如果用户最近有过与广告相关的查询，那么接下来点击相关广告的可能性会大幅提升
+* 前面的两种行为还可能随着间隔时间的增加而不是那么相关
+当前关联不止这些，而且人工难以刻画，需要模型来自动提取。RNN模型对此类问题非常适用，作者的主要工作是将数据集构造成适合RNN的输入（即对用户的历史ad impression根据时间排序），对模型本身并没有改进。
+ 
 #### 参考文献
 1. Deep Learning over Multi-field Categorical Data – A Case Study on User Response Prediction
 2. Product-based Neural Networks for User Response Prediction
@@ -84,7 +90,7 @@ CNN用于提取局部特征，在图像、NLP都取得不错的效果，如果�
 6. http://www.52cs.org/?p=1046
 7. http://techshow.ctrip.com/archives/1149.html
 8. http://tech.meituan.com/deep-understanding-of-ffm-principles-and-practices.html 
-
+9. Sequential Click Prediction for Sponsored Search with Recurrent Neural Networks
 
 
 
